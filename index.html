@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kit 12 Temperos Diversificados - Transforme Seus Pratos</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c2c2c;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 25%, #0f3460 50%, #e94560 75%, #f39c12 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 48, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 206, 84, 0.2) 0%, transparent 50%);
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="spices" patternUnits="userSpaceOnUse" width="40" height="40"><circle cx="20" cy="20" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="5" cy="35" r="1" fill="rgba(255,206,84,0.2)"/><circle cx="35" cy="8" r="1.2" fill="rgba(255,119,48,0.15)"/></pattern></defs><rect width="100" height="100" fill="url(%23spices)"/></svg>') repeat;
+            opacity: 0.4;
+            animation: sparkle 20s linear infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-10px) scale(1.02); }
+        }
+
+        @keyframes sparkle {
+            0% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(-5px) translateY(-5px); }
+            50% { transform: translateX(5px) translateY(5px); }
+            75% { transform: translateX(-3px) translateY(3px); }
+            100% { transform: translateX(0) translateY(0); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 1200px;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 20px rgba(255, 206, 84, 0.5), 0 0 40px rgba(255, 119, 48, 0.3);
+            background: linear-gradient(45deg, #fff, #ffce54, #ff7730);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .hero h1::before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background: linear-gradient(45deg, #333, #555);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: blur(2px);
+            transform: translate(2px, 2px);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            font-weight: 300;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            line-height: 1.4;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff4757, #ff3742);
+            color: white;
+            box-shadow: 0 8px 25px rgba(255, 71, 87, 0.4);
+            transform: translateY(0);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 71, 87, 0.6);
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(45deg, #25d366, #128c7e);
+            color: white;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.6);
+        }
+
+        .features {
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, #f8f9fa, #ffffff);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: #2c2c2c;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            border-radius: 2px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e, #ffd23f);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .product-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ff6b35;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-weight {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+            background: #f8f9fa;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            display: inline-block;
+        }
+
+        .product-description {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .benefits {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            position: relative;
+        }
+
+        .benefits::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="0,100 100,0 100,100" fill="rgba(255,255,255,0.05)"/></svg>') no-repeat;
+            background-size: cover;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .benefit-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .cta-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(45deg, #2c2c2c, #434343);
+            color: white;
+            text-align: center;
+        }
+
+        .price-highlight {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #ffd23f;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin: 2rem 0;
+        }
+
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 1rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .floating-whatsapp {
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Kit 12 Temperos Diversificados</h1>
+            <p class="hero-subtitle">Transforme suas receitas em verdadeiras experiências gastronômicas</p>
+            <div class="cta-buttons">
+                <a href="https://loja.infinitepay.io/pontodosnaturais/twq9793-kit-temperos-dourado" class="btn btn-primary">
+                    🛒 Comprar Agora
+                </a>
+                <a href="https://wa.me/5511999999999?text=Olá! Gostaria de saber mais sobre o Kit de 12 Temperos Diversificados" class="btn btn-whatsapp">
+                    📱 WhatsApp
+                </a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span style="font-size: 2rem;">⬇️</span>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title fade-in">Descubra Cada Sabor</h2>
+            <div class="products-grid">
+                <div class="product-card fade-in">
+                    <h3 class="product-name">Alho Frito</h3>
+                    <span class="product-weight">30g</span>
+                    <p class="product-description">Um clássico da culinária, o alho frito traz um toque crocante e saboroso a diversas preparações. Utilize-o em saladas, carnes e massas para um incremento irresistível.</p>
+                </div>
+                
+                <div class="product-card fade-in">
+                    <h3 class="product-name">Páprica Defumada</h3>
+                    <span class="product-weight">30g</span>
+                    <p class="product-description">Com seu aroma marcante e sabor defumado, a páprica é ideal para dar um toque especial a molhos e pratos grelhados. Experimente adicioná-la a carnes, legumes assados ou até mesmo em sopas.</p>
+                </div>
+                
+                <div class="product-card fade-in">
+                    <h3 class="product-name">Lemon Pepper</h3>
+                    <span class="product-weight">30g</span>
+                    <p class="product-description">A combinação refrescante de limão com a picância da pimenta é perfeita para realçar o sabor de peixes, aves e saladas. Uma pitada desse tempero pode fazer toda a diferença na sua refeição.</p>
+                </div>
+                
+                <div class="product-card fade-in">
+                    <h3 class="product-name">Caldo de Bacon</h3>
+                    <span class="product-weight">30g</span>
+                    <p class="product-description">Inconfundível e saboroso, o caldo de bacon é um verdadeiro coringa na cozinha. Use-o para intensificar o sabor de feijões, sopas e molhos.</p>
+                </div>
+                
+                <div class="product-card fade-in">
+                    <h3 class="product-name">Caldo de Carne</h3>
+                    <span class="product-weight">30g</span>
+                    <p class="product-description">Essencial para enriquecer o sabor de carnes e ensopados, o caldo de carne é elaborado com ingredientes selecionados que garantem um resultado final delicioso.</p>
+                </div>
+                
+                <div class="product-card fade-in">
+                    <h3 class="product-name">Pega Marido</h3>
+                    <span class="product-weight">30g</span>
+                    <p class="product-description">Um tempero tradicional que promete dar um toque especial e uma pitada de amor às suas receitas. Ideal para risotos, carnes e pratos de festa.</p>
+                </div>
+                
+                <div class="product-card fade-in">
+                    <h3 class="product-name">Ana Maria</h3>
+                    <span class="product-weight">30g</span>
+                    <p class="product-description">Este tempero é uma combinação perfeita de especiarias que traz um sabor único para suas preparações. Versátil, ele pode ser utilizado em assados, frituras ou mesmo como toque em saladas.</p>
+                </div>
+                
+                <div class="product-card fade-in">
+                    <h3 class="product-name">Orégano</h3>
+                    <span class="product-weight">10g</span>
+                    <p class="product-description">Um clássico das cozinhas italiana e mediterrânea, o orégano é ideal para temperar molhos de tomate, pizzas e carnes grelhadas. Um tempero que não pode faltar na sua despensa.</p>
+                </div>
+                
+                <div class="product-card fade-in">
+                    <h3 class="product-name">Louro</h3>
+                    <span class="product-weight">10g</span>
+                    <p class="product-description">Com seu aroma característico, as folhas de louro são perfeitas para dar sabor a caldos e ensopados. Um detalhe simples que faz toda a diferença.</p>
+                </div>
+                
+                <div class="product-card fade-in">
+                    <h3 class="product-name">Chimichurri</h3>
+                    <span class="product-weight">30g</span>
+                    <p class="product-description">Popular na culinária argentina, o chimichurri é um molho à base de ervas, perfeito para acompanhar carnes grelhadas. Use-o como marinada ou como molho na hora de servir para um sabor exuberante.</p>
+                </div>
+                
+                <div class="product-card fade-in">
+                    <h3 class="product-name">Tempero para Feijão</h3>
+                    <span class="product-weight">30g</span>
+                    <p class="product-description">Desenvolvido especialmente para realçar o sabor do feijão, esse tempero é um must-have para quem aprecia uma boa feijoada ou um simples feijão caseiro. Experimente e surpreenda-se!</p>
+                </div>
+                
+                <div class="product-card fade-in">
+                    <h3 class="product-name">Tempero Baiano</h3>
+                    <span class="product-weight">30g</span>
+                    <p class="product-description">Com sua mistura de especiarias típicas da Bahia, esse tempero traz um toque regional às suas receitas, perfeito para moquecas, frituras e outros pratos típicos da culinária nordestina.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits">
+        <div class="container">
+            <h2 class="section-title fade-in">Por Que Escolher Nosso Kit?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item fade-in">
+                    <span class="benefit-icon">🌟</span>
+                    <h3>Qualidade Premium</h3>
+                    <p>Ingredientes frescos e selecionados para garantir o melhor sabor em suas receitas</p>
+                </div>
+                <div class="benefit-item fade-in">
+                    <span class="benefit-icon">🍽️</span>
+                    <h3>Versatilidade Total</h3>
+                    <p>12 temperos diferentes para transformar qualquer prato simples em uma experiência gastronômica</p>
+                </div>
+                <div class="benefit-item fade-in">
+                    <span class="benefit-icon">⚡</span>
+                    <h3>Praticidade</h3>
+                    <p>Porções ideais para uso doméstico, sem desperdício e com máximo aproveitamento</p>
+                </div>
+                <div class="benefit-item fade-in">
+                    <span class="benefit-icon">💰</span>
+                    <h3>Economia</h3>
+                    <p>Kit completo com preço especial - mais econômico que comprar individualmente</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="section-title fade-in" style="color: white;">Transforme Sua Cozinha Hoje!</h2>
+            <p class="fade-in" style="font-size: 1.3rem; margin-bottom: 2rem;">Kit completo de 12 temperos diversificados para revolucionar seus pratos</p>
+            <div class="price-highlight fade-in">Oferta Especial!</div>
+            <div class="cta-buttons">
+                <a href="https://loja.infinitepay.io/pontodosnaturais/twq9793-kit-temperos-dourado" class="btn btn-primary" style="font-size: 1.3rem; padding: 1.2rem 3rem;">
+                    🛒 Comprar Agora
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="floating-whatsapp">
+        <a href="https://wa.me/5511999999999?text=Olá! Gostaria de saber mais sobre o Kit de 12 Temperos Diversificados" class="btn btn-whatsapp" style="border-radius: 50%; width: 60px; height: 60px; padding: 0; justify-content: center; font-size: 1.5rem;">
+            📱
+        </a>
+    </div>
+
+    <script>
+        // Animação de scroll para elementos fade-in
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Animações GSAP para elementos especiais
+        gsap.from('.hero h1', {
+            duration: 1,
+            y: -50,
+            opacity: 0,
+            ease: 'power2.out'
+        });
+
+        gsap.from('.hero-subtitle', {
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            delay: 0.3,
+            ease: 'power2.out'
+        });
+
+        gsap.from('.cta-buttons', {
+            duration: 1,
+            y: 30,
+            opacity: 0,
+            delay: 0.6,
+            ease: 'power2.out'
+        });
+
+        // Animação de parallax sutil no hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            
+            if (scrolled < window.innerHeight) {
+                document.querySelector('.hero::before').style.transform = `translateY(${rate}px)`;
+            }
+        });
+
+        // Smooth scroll para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

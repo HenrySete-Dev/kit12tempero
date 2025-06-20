@@ -407,6 +407,72 @@
             margin-bottom: 1rem;
         }
 
+        /* Gallery Section */
+        .gallery-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, #FFFFFF, #F8FAFC);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+            background: white;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 2rem 1.5rem 1.5rem;
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-overlay p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
         /* CTA Section */
         .cta-section {
             padding: 6rem 2rem;
@@ -431,21 +497,12 @@
             padding: 0;
             font-size: 1.5rem;
             box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            min-width: 64px;
+            min-height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-
-        .floating-whatsapp .btn {
-    border-radius: 50%;
-    width: 64px;
-    height: 64px;
-    padding: 0;
-    font-size: 1.5rem;
-    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
-    min-width: 64px;     /* força largura mínima */
-    min-height: 64px;    /* força altura mínima */
-    display: flex;       /* centraliza o ícone */
-    align-items: center; /* centraliza verticalmente */
-    justify-content: center; /* centraliza horizontalmente */
-}
 
         @keyframes pulse {
             0% { transform: scale(1); }
@@ -492,43 +549,27 @@
         .footer {
             background: #f8fafc;
             border-top: 1px solid #eee;
-            padding: 2rem 0 1rem 0;
+            padding: 3rem 2rem 2rem;
             margin-top: 3rem;
         }
 
         .footer-content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
         }
 
         .footer-brand {
-            font-size: 1.1rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
         }
-
-        .footer-links {
-            display: flex;
-            align-items: center;
-            gap: 1.2rem;
-        }
-
-        .footer-links a {
-            color: inherit;
-            text-decoration: none;
-            font-size: 1.2rem;
-            transition: color 0.2s;
-        }
-
-        .footer-links a[title="WhatsApp"] { color: #25D366; }
-        .footer-links a[title="Instagram"] { color: #E1306C; }
-        .footer-links a:hover { opacity: 0.7; }
 
         .footer-legal {
-            margin-top: 0.5rem;
             font-size: 0.95rem;
             color: var(--gray-color);
+            line-height: 1.6;
         }
 
         .footer-legal a {
@@ -536,6 +577,10 @@
             text-decoration: underline;
             margin: 0 0.5rem;
             cursor: pointer;
+        }
+
+        .footer-legal a:hover {
+            opacity: 0.8;
         }
 
         /* Modal */
@@ -619,6 +664,15 @@
             .pricing-card.featured {
                 transform: none;
             }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .gallery-item img {
+                height: 220px;
+            }
             
             .floating-whatsapp {
                 bottom: 20px;
@@ -632,12 +686,24 @@
                 padding: 0;
                 font-size: 1.5rem;
                 box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+                min-width: 64px;
+                min-height: 64px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
-            .footer-content { 
-                flex-direction: column; 
-                align-items: flex-start; 
-                gap: 0.5rem; 
+            .footer {
+                padding: 2rem 1rem 1.5rem;
+            }
+
+            .footer-brand {
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+            }
+
+            .footer-legal {
+                font-size: 0.9rem;
             }
 
             .modal { 
@@ -646,12 +712,12 @@
             }
 
             .pricing-card img {
-            width: 180px;
-            height: auto;
-            margin-bottom: 1.5rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow-md);
-        }
+                width: 180px;
+                height: auto;
+                margin-bottom: 1.5rem;
+                border-radius: 12px;
+                box-shadow: var(--shadow-md);
+            }
         }
 
         @media (max-width: 480px) {
@@ -663,17 +729,21 @@
                 margin-bottom: 3rem;
             }
             
-            .features, .benefits, .cta-section {
+            .features, .benefits, .cta-section, .gallery-section {
                 padding: 4rem 1rem;
             }
 
+            .gallery-item img {
+                height: 200px;
+            }
+
             .pricing-card img {
-            width: 180px;
-            height: auto;
-            margin-bottom: 1.5rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow-md);
-        }
+                width: 180px;
+                height: auto;
+                margin-bottom: 1.5rem;
+                border-radius: 12px;
+                box-shadow: var(--shadow-md);
+            }
         }
     </style>
 </head>
@@ -832,6 +902,57 @@
         </div>
     </section>
 
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Veja Nossos Produtos</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item fade-in">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjlw7VnF1sOg6TYcZZybE710YDiOfVKEVvdJQRBYfiCEMJySeu326w_MMrAwNOBmbLHy5opTPXchFlMj8w-mKkbX_nz-8ujAONu5wDGag3xHUt4yNDolpzWqztn6WDMiLcmiwGifdqAuUjdrm341oMQeWiSRoH_rfbMKfubL3pihoxxI8Ug8QdjC-6Q7RSB/s320/91db872e-d2e1-4339-8223-bc8c8ef8ebed.png" alt="Kit 12 Temperos Diversificados">
+                    <div class="gallery-overlay">
+                        <h3>Kit Completo</h3>
+                        <p>12 temperos selecionados para transformar suas receitas</p>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxbnHF8vVUrcecqr2ekM7Y-XkviQXxbH70Ro-fBF6jortABlS_3-zdxBgf1nMLTgSm4qPp5iYijmg6IUsMKOtPEr6G2tDxrAtIdo_7KGXCBZIv-VBNfmscO925AZo9l7-qb2k58nFOfA0m5eguP4gByU9CPWN0cF6XxhbokX2sGQMs_WlMcDTKb4Ys1tV7/s320/%7B6B5461D4-1102-494B-85DB-507A31FF2530%7D.png" alt="Temperos Organizados">
+                    <div class="gallery-overlay">
+                        <h3>Organização Perfeita</h3>
+                        <p>Cada tempero em sua embalagem individual</p>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3YThyKlPgiT1YTO46GjSh7SQXavZHTmaoUIcgvy1PnTV0eSzBziIf7ZNmMBEseBXc2jQF8Mi_bEbF4QPlo3-dfQrKjU7bu23ZNl4q8bP8oaAhlmm7HVOuz6ROKus3MK8wH9X_8TigqcVgccEVJCjHogNuWaQln-LWWRTph6bnC9sd28xmWB5SZ7XDUrwo/s320/%7BC5FB5461-95F4-4697-B49F-42B372D8E7E7%7D.png" alt="Qualidade Premium">
+                    <div class="gallery-overlay">
+                        <h3>Qualidade Premium</h3>
+                        <p>Ingredientes frescos e selecionados</p>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjXxEP5TMFTIf1Onj521tZKb0V2WmMVVt7pQSMkVgEpqURMtf9UcH9WT571AeKGZMJlMRTF_v_W4UdRhflcJl66Hsqn_ABBDZy6JhOK9Jg-0RRtzcHCjmSff1fg_4etdAoKhL3gZ-2LsodTMpA4goc1gSVQmFpmbcybiE8VYloAMz98vX6sBf55C9qzS-hV/s320/%7BE26A3841-AF58-4AAF-85B6-57FCCB778BD6%7D.png" alt="Kit Premium com Porta Temperos">
+                    <div class="gallery-overlay">
+                        <h3>Kit Premium</h3>
+                        <p>Inclui porta temperos para organização total</p>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg25OEasSbCqD7XSzt8tDaT66DcyqPCJkBPYpfN3kthWy0Px6KU-iu6JEbX2MJ8g9YBHdIEkdQ_o_TGQF4jg4DPt4pRsavchaq4B8m-eN0xVtYNCdqGIsPhpgH7iwOJUxDxwEOJy-7VyOXnVKXjHHh9L32ciCSCCZWKf3xIIIMYoKP0G1gTB_FJttghMrqU/s320/%7B2AFD1D8D-F732-41E3-BCAD-044C07AFBB13%7D.png" alt="Kit 12 Temperos Diversificados">
+                    <div class="gallery-overlay">
+                        <h3>Kit Completo</h3>
+                        <p>12 temperos selecionados para transformar suas receitas</p>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1Ol6DBlYFOxgTma3slT7JsSVAlOe2qwm4HX-idd5vnlGzjG6hmceZ_ymdTPY0f5UCoi4B5RJlZX08tWOWtwpTw99aTEdQfsuGnbDxtJQLBMQv9tzJU0f4tP5MPj5iIs4xsEjlmI4r6GvpD2gRY3OtC2yNmQ-9Q8PFXpD4wF7Xi32oRdBDxP4kl042sDIg/s320/%7B7FFFC023-4241-4EDA-938F-6CE3CBF3718E%7D.png" alt="Kit 12 Temperos Diversificados">
+                    <div class="gallery-overlay">
+                        <h3>Kit Completo</h3>
+                        <p>12 temperos selecionados para transformar suas receitas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Final CTA Section -->
     <section class="cta-section">
         <div class="container">
@@ -872,16 +993,13 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <span style="font-weight:700; color:var(--primary-color); font-size:1.2rem;">Ponto dos Naturais</span>
+                    Ponto dos Naturais
                 </div>
-                <div class="footer-links">
-                    <a href="https://wa.me/5511967056347?text=Olá! Gostaria de saber mais sobre o Kit de 12 Temperos Diversificados" target="_blank" rel="noopener" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <div class="footer-legal">
+                    &copy; 2025. Todos os direitos reservados.<br>
+                    <a id="open-privacidade">Política de Privacidade</a> |
+                    <a id="open-termos">Termos de Uso</a>
                 </div>
-            </div>
-            <div class="footer-legal">
-                &copy; 2025. Todos os direitos reservados.
-                <a id="open-privacidade">Política de Privacidade</a> |
-                <a id="open-termos">Termos de Uso</a>
             </div>
         </div>
     </footer>

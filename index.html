@@ -433,6 +433,20 @@
             box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
         }
 
+        .floating-whatsapp .btn {
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+    padding: 0;
+    font-size: 1.5rem;
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+    min-width: 64px;     /* força largura mínima */
+    min-height: 64px;    /* força altura mínima */
+    display: flex;       /* centraliza o ícone */
+    align-items: center; /* centraliza verticalmente */
+    justify-content: center; /* centraliza horizontalmente */
+}
+
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
